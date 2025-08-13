@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:if="${student.name != null}">Update Student</title>
+  <title th:unless="${student.name != null}">Create New Student</title>
+</head>
+<body>
+<form th:if="${student.name != null}"
+      th:action="@{'/students/edit'}"
+      th:object="${student}" method="post">
+  <h1 th:if="${student.name != null}">Update Student Form</h1>
+  <h1 th:unless="${student.name != null}">Create Student Form</h1>
+  <label>ID: <input type="text" th:field="*{id}" readonly /></label><br/>
+  <label>Name: <input type="text" th:field="*{name}" /></label><br/>
+  <label>YOB: <input type="number" th:field="*{yob}" /></label><br/>
+  <label>GPA: <input type="number" step="0.01" th:field="*{gpa}" /></label><br/>
+  <button type="submit">Update</button>
+</form>
+
+<form th:unless="${student.name != null}"
+      th:action="@{'/students/new'}"
+      th:object="${student}" method="post">
+  <h1>Create New Student</h1>
+  <label>ID: <input type="text" th:field="*{id}" /></label><br/>
+  <label>Name: <input type="text" th:field="*{name}" /></label><br/>
+  <label>YOB: <input type="number" th:field="*{yob}" /></label><br/>
+  <label>GPA: <input type="number" step="0.01" th:field="*{gpa}" /></label><br/>
+  <button type="submit">Save</button>
+</form>
+</body>
+</html>
